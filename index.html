@@ -7,10 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link rel="stylesheet" href="style.css">
+	<script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
-<body>
-	<div class="container">
+<body> <!--Created a data here using alpine directives/ defining data-->
+	<div class="container"  x-data="{ showCart: false, smallTotal : 29.99, smallQty : 0, mediumTotal : 40.99, mediumQty : 0, largeTotal : 78.99, largeQty : 0, cartTotal : 0 }" >
 
 		<div class="header"  >
 			<div class="f3">
@@ -24,18 +25,24 @@
 			</div>
 
 			<div class="f1" >
-				<a href="" class="cart-link" >
+				
+				<!-- making my cart to show when i click on it/ created a button to click on it -->
+				<button x-on:click="showCart=true" >
 					<img src="144161554-shopping-cart-icon.webp" width="30" alt="">
+					Show cart </button>
 					<strong>R0.00</strong>
-				</a>
+				<!--/a --->
 				<!-- <span>0.00</span> -->
 			</div>
 		</div>
 
 		<div class="cart-box">
-			<div class="cart" >
+			<div class="cart" x-show="showCart">
 				<div>
-					<a href="">Close</a>
+					<button x-on:click="showCart=false" >
+						<img src="144161554-shopping-cart-icon.webp" width="30" alt="">
+						Close cart </button>
+						<strong>R0.00</strong>
 				</div>
 				<div class="">
 					<h2>Cart
@@ -44,29 +51,38 @@
 				</div>
 				
 				<table>
-					<tr>
-						<td>Small size pizza</td>
+					<tr> <!--Using the data-->
+						<td>Small pizza</td>
 						<td>
+							<span x-text="smallQty" ></span>
 							<button>+</button>
 							<button>-</button>
 						</td>
-						<td>R0.00</td>
+						<td>
+						R<span x-text="smallTotal.toFixed(2)"></span>
+						</td>
 					</tr>
 					<tr>
 						<td>Medium pizza</td>
 						<td>
+							<span x-text="mediumQty" ></span>
 							<button>+</button>
 							<button>-</button>
 						</td>
-						<td>R0.00</td>
+						<td>
+						R<span x-text="mediumTotal.toFixed(2)" ></span>
+						</td>
 					</tr>
 					<tr>
 						<td>Large pizza</td>
 						<td>
+							<span x-text="largeQty" ></span>
 							<button>+</button>
 							<button>-</button>
 						</td>
-						<td>R0.00</td>
+						<td>
+						R<span x-text="largeTotal.toFixed(2)"></span>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="2">Total</td>
@@ -98,7 +114,7 @@
 				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTYXKCnpTk1lge3kEUDE6-MqiraotXNS37eqvAkVEdRNa0u9n_flrX6cKZKzoYmj2f57E&usqp=CAU" alt="">
 				<h3>Small pizza</h3>
 				<h4>R29.99</h4>
-				<button class="buy btn" >
+				<button class="buy btn" x-on:click="smallTotal += 29.99; smallQty +=1 " >
 					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTYXKCnpTk1lge3kEUDE6-MqiraotXNS37eqvAkVEdRNa0u9n_flrX6cKZKzoYmj2f57E&usqp=CAU" alt="" width="20" >
 				Buy</button>
 
@@ -112,7 +128,7 @@
 				<img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8&w=1000&q=80" alt=" alt="" width="250" height="200">
 				<h3>Medium pizza</h3>
 				<h4>R40.99</h4>
-				<button class="buy btn" >
+				<button class="buy btn" x-on:click="mediumTotal += 40.99; mediumQty +=1 " >
 					<img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8&w=1000&q=80" alt="" width="20" >
 				Buy</button>
 
@@ -126,7 +142,7 @@
 				<img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ=" alt="" width="250" height="200">
 				<h3>Large pizza</h3>
 				<h4>R78.99</h4>
-				<button class="buy btn" >
+				<button class="buy btn" x-on:click="largeTotal += 78.99; largeQty +=1 " >
 					<img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ=" alt="" width="20" >
 				Buy</button>
 				<div>
