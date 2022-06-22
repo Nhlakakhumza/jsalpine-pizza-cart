@@ -19,7 +19,10 @@
 		mediumQty : 0, 
 		largeTotal : 78.99, 
 		largeQty : 0,
-		
+		payNow : false,
+		paymentAmount : 0,
+		paymentMessage : '',
+
 		buySmall() {
 			this.smallTotal += 29.99;
 			this.smallQty +=1
@@ -55,6 +58,33 @@
 		},
 		totalQty() {
 			return this.smallQty + this.mediumQty + this.largeQty
+		},
+
+		makePayment() {
+			if (this.paymentAmount === 0) {
+				this.paymentMessage = 'No amount entered!'
+			}
+
+			if (this.paymentAmount >= this.cartTotal() ){
+				this.paymentMessage = 'Payment successful!'
+
+			setTimeout(() => {
+				this.paymentNow = false;
+				this.clearCart();
+				
+			}, 3000);	
+				
+			} else {
+				this.paymentMessage = 'Payment failed!'
+			}
+		},
+		clearCart() {
+			this.smallTotal = 0.00;
+		    this.smallQty = 0.00;
+		    this.mediumTotal = 0.00; 
+		    this.mediumQty = 0; 
+		    this.largeTotal = 0.00; 
+		    this.largeQty = 0;
 		}
 		
 	 }" >
@@ -124,26 +154,32 @@
 						R<span x-text="largeTotal.toFixed(2)"></span>
 						</td>
 					</tr>
-					<tr>
+					<tr x-show="cartTotal() > 0">
 						<td colspan="2">Total</td>
 						<td>
 							R<span x-text="cartTotal().toFixed(2)" ></span>
 						</td>
 					</tr>
-					<tr>
+					<tr x-show="cartTotal() > 0">
 						<td colspan="2">
 
-							<div class="message" >Message...</div>
+							<div x-show="payNow" >
+								<div class="message" x-text="paymentMessage" ></div>
 							<div>
 								<label for="">Payment amount</label>
-								<input class="input" type="number" placeholder="Payment amount" >
+								<input class="input" type="number" placeholder="Payment amount" x-model="paymentAmount" >
+								<button x-on:click="makePayment" class="btn" ><img src="144161554-shopping-cart-icon.webp" width="20" alt="">Pay now</button>
 							</div>
+							<div>
+								<!--<div x-text="paymentAmount" ></div>--> 
+							</div>
+							
+							</div>
+							
 
 						</td>
 						<td>
-							<button class="btn" >
-								<img src="144161554-shopping-cart-icon.webp" width="20" alt="">
-								Buy</button>
+							<button x-show="!payNow" x-on:click="payNow=true" class="btn" ><img src="144161554-shopping-cart-icon.webp" width="20" alt="">Pay</button>
 						</td>
 					</tr>
 				</table>
