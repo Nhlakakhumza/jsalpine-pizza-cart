@@ -27,7 +27,7 @@ body {
     }
 }
 
-/* Add this class */
+/* Adding the class */
 .box {
     /* background-color:lightseagreen; */
     border: 1em solid green;
@@ -48,24 +48,6 @@ body {
     display: flex;
     border-radius: 0.5em;
 }
-
-h1 {
-
-    /* padding: 1em; */
-    /* border-radius: 0.25em; */
-}
-
-h2 {
-    /* background-color: lightcoral; */
-    /* padding: 1em; */
-}
-
-span /*{
-    border: 1px solid;
-    background-color: lightgreen;
-    padding: 1em;
-    margin: 1em;
-}*/
 
 .input {
     margin: 1em;
@@ -137,7 +119,7 @@ td {
 
 .message {
     padding: 1em;
-    /* color: grey; */
+    /* color: gold; */
     font-weight: bold;
     background-color: gold;
 }
@@ -160,14 +142,6 @@ td {
 .buy {
     width: 7em;
     margin-bottom: 1em;
-    
-    /* padding: 1em 0em 1em 0em;
-    border-radius: 0.25em;
-    background-color: gold;
-    color: grey;
-    font-weight: bold;
-    border: 0;
-    cursor: pointer; */
 }
 
 @media (min-width: 1024px) {
@@ -176,11 +150,7 @@ td {
     }
 
     .cart {
-        /* background-color: dodgerblue; */
-        /* padding: 1em; */
-        width: 50%;
-        /* margin-top: -10em; */
-        /* border-radius-bottom: 1em; */
+        width: 50%
     }
 
 }

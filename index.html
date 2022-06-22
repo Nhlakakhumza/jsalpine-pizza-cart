@@ -11,7 +11,53 @@
 </head>
 
 <body> <!--Created a data here using alpine directives/ defining data-->
-	<div class="container"  x-data="{ showCart: false, smallTotal : 29.99, smallQty : 0, mediumTotal : 40.99, mediumQty : 0, largeTotal : 78.99, largeQty : 0, cartTotal : 0 }" >
+	<div class="container"  x-data="{ 
+		showCart: false, 
+		smallTotal : 29.99, 
+		smallQty : 0, 
+		mediumTotal : 40.99, 
+		mediumQty : 0, 
+		largeTotal : 78.99, 
+		largeQty : 0,
+		
+		buySmall() {
+			this.smallTotal += 29.99;
+			this.smallQty +=1
+		},
+		lessSmall() {
+			if (this.smallQty > 0) {
+				this.smallTotal -= 29.99;
+			    this.smallQty -=1
+			}	
+		},
+		buyMedium() {
+			this.mediumTotal += 49.99;
+			this.mediumQty +=1
+		},
+		lessMedium() {
+			if (this.mediumQty > 0) {
+				this.mediumTotal -= 49.99;
+			    this.mediumQty -=1
+			}	
+		},
+		buyLarge() {
+			this.largeTotal += 78.99;
+			this.largeQty +=1
+		},
+		lessLarge() {
+			if (this.largeQty > 0) {
+				this.largeTotal -= 79.99;
+			    this.largeQty -=1
+			}	
+		},
+		cartTotal() {
+			return this.smallTotal + this.mediumTotal + this.largeTotal
+		},
+		totalQty() {
+			return this.smallQty + this.mediumQty + this.largeQty
+		}
+		
+	 }" >
 
 		<div class="header"  >
 			<div class="f3">
@@ -24,15 +70,9 @@
 				<small>Inspired by <a href="http://www.pizzapefert.com/">pizzapeferct</a>  </small>
 			</div>
 
-			<div class="f1" >
-				
-				<!-- making my cart to show when i click on it/ created a button to click on it -->
-				<button x-on:click="showCart=true" >
-					<img src="144161554-shopping-cart-icon.webp" width="30" alt="">
-					Show cart </button>
-					<strong>R0.00</strong>
-				<!--/a --->
-				<!-- <span>0.00</span> -->
+			<div class="f1" ><!-- making my cart to show when i click on it/ created a button to click on it -->
+				<button x-on:click="showCart=true" ><img src="144161554-shopping-cart-icon.webp" width="30" alt="">Show cart </button>
+				<strong x-show="totalQty() > 0" ><span x-text="totalQty()" ></span> pizzas in the cart.</strong>
 			</div>
 		</div>
 
@@ -51,34 +91,34 @@
 				</div>
 				
 				<table>
-					<tr> <!--Using the data-->
+					<tr x-show="smallQty > 0" > <!--Using the data-->
 						<td>Small pizza</td>
 						<td>
 							<span x-text="smallQty" ></span>
-							<button>+</button>
-							<button>-</button>
+							<button x-on:click="buySmall" x-show="smallQty > 0" >+</button>
+							<button x-on:click="lessSmall" x-show="smallQty > 0" >-</button>
 						</td>
 						<td>
 						R<span x-text="smallTotal.toFixed(2)"></span>
 						</td>
 					</tr>
-					<tr>
+					<tr x-show="mediumQty > 0">
 						<td>Medium pizza</td>
 						<td>
 							<span x-text="mediumQty" ></span>
-							<button>+</button>
-							<button>-</button>
+							<button x-on:click="buyMedium" x-show="mediumQty > 0" >+</button>
+							<button x-on:click="lessMedium" x-show="mediumQty > 0">-</button>
 						</td>
 						<td>
 						R<span x-text="mediumTotal.toFixed(2)" ></span>
 						</td>
 					</tr>
-					<tr>
+					<tr x-show="largeQty > 0">
 						<td>Large pizza</td>
 						<td>
 							<span x-text="largeQty" ></span>
-							<button>+</button>
-							<button>-</button>
+							<button x-on:click="buyLarge" x-show="largeQty > 0">+</button>
+							<button x-on:click="lessLarge" x-show="largeQty > 0">-</button>
 						</td>
 						<td>
 						R<span x-text="largeTotal.toFixed(2)"></span>
@@ -86,7 +126,9 @@
 					</tr>
 					<tr>
 						<td colspan="2">Total</td>
-						<td>R0.00</td>
+						<td>
+							R<span x-text="cartTotal().toFixed(2)" ></span>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
