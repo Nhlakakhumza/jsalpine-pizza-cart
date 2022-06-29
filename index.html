@@ -71,8 +71,13 @@
 			setTimeout(() => {
 				this.paymentNow = false;
 				this.clearCart();
+				this.paymentMessage = '';
 				
-			}, 3000);	
+			}, 3000);
+			this.paymentAmount = '';
+			
+
+
 				
 			} else {
 				this.paymentMessage = 'Payment failed!'
